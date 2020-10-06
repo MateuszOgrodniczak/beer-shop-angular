@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --ssl --ssl-key C:\\certs\\localhost.key  --ssl-cert C:\\certs\\localhost.crt",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -11,7 +11,7 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "~8.2.13",
+    "@angular/animations": "^8.2.14",
     "@angular/common": "~8.2.13",
     "@angular/compiler": "~8.2.13",
     "@angular/core": "~8.2.13",
@@ -19,7 +19,15 @@
     "@angular/platform-browser": "~8.2.13",
     "@angular/platform-browser-dynamic": "~8.2.13",
     "@angular/router": "~8.2.13",
+    "@auth0/angular-jwt": "^4.1.2",
+    "@ng-bootstrap/ng-bootstrap": "^6.1.0",
+    "angular-bootstrap-md": "^9.3.1",
+    "bcryptjs": "^2.4.3",
+    "jquery": "^3.5.1",
+    "jwt-decode": "^2.2.0",
+    "ngx-toastr": "^12.0.1",
     "rxjs": "~6.4.0",
+    "rxjs-compat": "^6.5.5",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
   },

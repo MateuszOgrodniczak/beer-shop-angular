@@ -1,0 +1,38 @@
+<div class="container">
+  <h2>Cart</h2>
+  <hr>
+  <div *ngIf="isEmpty()">
+    <div class="alert alert-info">Your cart is empty</div>
+  </div>
+  <div *ngIf="!isEmpty()">
+    <table class="table">
+      <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Cost</th>
+        <th scope="col">Amount</th>
+        <th scope="col"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <ng-container *ngFor="let product of products | keyvalue">
+        <tr>
+          <td><img [src]='product.key.imageUrl' class="image-view"/></td>
+          <td>{{product.key.name}}</td>
+          <td>{{product.key.description}}</td>
+          <td>{{product.key.cost}} zł</td>
+          <td>{{product.value}}</td>
+          <td><button class="btn btn-danger" (click)="remove(product.key)">Remove</button></td>
+        </tr>
+      </ng-container>
+      </tbody>
+    </table>
+    <div>
+      <hr>
+      <h3>Total cost: <b>{{order.cost}} zł</b></h3>
+      <div class="btn btn-success" (click)="buy()">Make order</div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,60 @@
+<div class="container">
+<h2>Edit product's details</h2>
+<form [formGroup]=form (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" id="name" formControlName="name" required>
+
+    <div *ngIf="name.invalid && (name.dirty || name.touched)"
+         class="alert alert-danger">
+      <div *ngIf="name.errors.required">
+        Product name is required.
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="description">Description</label>
+    <input type="text" class="form-control" id="description" formControlName="description" required>
+
+    <div *ngIf="description.invalid && (description.dirty || description.touched)"
+         class="alert alert-danger">
+      <div *ngIf="description.errors.required">
+        Product description is required.
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="cost">Cost</label>
+    <input type="text" class="form-control" id="cost" formControlName="cost" required>
+
+    <div *ngIf="cost.invalid && (cost.dirty || cost.touched)"
+         class="alert alert-danger">
+      <div *ngIf="cost.errors.required">
+        Product cost is required.
+      </div>
+      <div *ngIf="cost.errors.pattern">
+        Product cost must be a valid number
+      </div>
+      <div *ngIf="cost.errors.min">
+        Product cost must be not less than 0 PLN
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Image</label>
+    <label for="image" class="btn btn-default form-control">Choose a file</label>
+    <input type="file" accept="image/*" (change)="showPreview($event)" id="image" class="hidden"/>
+    <!-- Image Preview -->
+    <ng-container *ngIf="imageURL && imageURL !== ''">
+      <hr>
+      <img class="image-view-large" [src]="imageURL"/>
+      <br>
+      <button class="btn btn-danger image-del-btn" (click)="removeImage()">Remove image</button>
+      <hr>
+    </ng-container>
+  </div>
+
+  <button class="btn btn-success" type="submit">Submit</button>
+</form>
+</div>
+<br>

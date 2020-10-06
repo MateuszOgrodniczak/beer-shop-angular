@@ -1,0 +1,58 @@
+<div class="container">
+  <h2>Client site - list of orders</h2>
+  <hr>
+  <div *ngIf="hasOrders()">
+    <table class="table">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Date</th>
+        <th scope="col">Cost</th>
+        <th scope="col">Products</th>
+      </tr>
+      </thead>
+      <tbody>
+      <ng-container *ngFor="let order of orders; let i = index" [attr.data-index]="i">
+        <tr>
+          <td>{{i + 1}}</td>
+          <td>{{order.date | date: customDate}}</td>
+          <td>{{order.cost}} zł</td>
+          <td>
+            <button class="btn btn-success" (click)="show(order.id)">Show</button>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="4">
+            <table id="orderProducts_{{order.id}}" style="display: none" class="table">
+              <thead>
+              <tr>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+              </tr>
+              </thead>
+              <tbody>
+              <ng-container *ngFor="let products of orderProductsWithAmounts.get(order.id) | keyvalue">
+                <tr>
+                  <td><img alt="{{products.key.name}}" [src]='products.key.imageUrl' class="image-view"/></td>
+                  <td>{{products.key.name}}</td>
+                  <td>{{products.key.description}}</td>
+                  <td>{{products.key.cost}} zł</td>
+                  <td>{{products.value}}</td>
+                </tr>
+              </ng-container>
+              <tr><button class="btn btn-danger" (click)="hide(order.id)">Hide products</button></tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </ng-container>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="!hasOrders()">
+    <div class="alert alert-info">You do not have any orders</div>
+  </div>
+</div>

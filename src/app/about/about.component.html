@@ -1,0 +1,19 @@
+<div class="container">
+  <div *ngIf="isShopRegistered()">
+    <h1>{{shop.name}} - Beer shop</h1>
+    <hr>
+    <h2><strong>Address</strong></h2>
+    <p>Street: {{shop.street}}</p>
+    <p>City: {{shop.city}}, {{shop.postalCode}}</p>
+    <hr>
+    <h2><strong>Contact</strong></h2>
+    <p>Phone number: {{shop.phone}}</p>
+    <p>Email address: {{shop.email}}</p>
+    <hr>
+  </div>
+  <div *ngIf="!isShopRegistered()">
+    <div class="alert alert-danger">
+      This section cannot be accessed. Shop details has not been registered yet.
+    </div>
+  </div>
+</div>

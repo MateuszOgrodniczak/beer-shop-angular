@@ -1,0 +1,37 @@
+<div class="container">
+  <h2>Admin site - users' accounts management</h2>
+  <br>
+  <div *ngIf="users && users.length > 0">
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">First name</th>
+      <th scope="col">Last name</th>
+      <th scope="col">Username</th>
+      <th scope="col">Email</th>
+      <th scope="col">Role</th>
+      <th scope="col">Enabled</th>
+      <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <ng-container *ngFor="let user of users">
+      <tr>
+        <td>{{user.firstName}}</td>
+        <td>{{user.lastName}}</td>
+        <td>{{user.username}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.role}}</td>
+        <td>{{user.enabled}}</td>
+        <div *ngIf="user.enabled">
+          <td><button class="btn btn-danger" (click)="disableUser(user.id)">Disable</button></td>
+        </div>
+        <div *ngIf="!user.enabled">
+          <td><button class="btn btn-success" (click)="enableUser(user.id)">Enable</button></td>
+        </div>
+      </tr>
+    </ng-container>
+    </tbody>
+  </table>
+  </div>
+</div>

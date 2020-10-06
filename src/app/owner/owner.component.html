@@ -1,0 +1,124 @@
+<div class="container">
+  <h2>Owner site</h2>
+  <p>You have privileges to edit the shop's data and add new products.</p>
+  <p>Products cannot be added until you fill in the shop's details.</p>
+  <hr>
+
+  <h3>Shop's data</h3>
+  <form [formGroup]=form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" formControlName="name" required>
+
+      <div *ngIf="name.invalid && (name.dirty || name.touched)"
+           class="alert alert-danger">
+        <div *ngIf="name.errors.required">
+          Shop name is required.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="street">Street</label>
+      <input type="text" class="form-control" id="street" formControlName="street" required>
+
+      <div *ngIf="street.invalid && (street.dirty || street.touched)"
+           class="alert alert-danger">
+        <div *ngIf="street.errors.required">
+          Street is required.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="postalCode">Postal code</label>
+      <input type="text" class="form-control" id="postalCode" required formControlName="postalCode">
+
+      <div *ngIf="postalCode.invalid && (postalCode.dirty || postalCode.touched)"
+           class="alert alert-danger">
+        <div *ngIf="postalCode.errors.required">
+          Postal code is required.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="city">City</label>
+      <input type="text" class="form-control" id="city" required formControlName="city">
+
+      <div *ngIf="city.invalid && (city.dirty || city.touched)"
+           class="alert alert-danger">
+        <div *ngIf="city.errors.required">
+          City name is required.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="phone">Phone number</label>
+      <input type="text" class="form-control" id="phone" required formControlName="phone">
+
+      <div *ngIf="phone.invalid && (phone.dirty || phone.touched)"
+           class="alert alert-danger">
+        <div *ngIf="phone.errors.required">
+          Phone number is required.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email address</label>
+      <input type="text" class="form-control" id="email" required formControlName="email">
+
+      <div *ngIf="email.invalid && (email.dirty || email.touched)"
+           class="alert alert-danger">
+        <div *ngIf="email.errors.required">
+          Email address is required.
+        </div>
+        <div *ngIf="email.errors.email">
+          Email address is invalid.
+        </div>
+      </div>
+    </div>
+
+    <button class="btn btn-success" type="submit">Submit</button>
+  </form>
+  <hr>
+
+  <h3>Products</h3>
+  <div *ngIf="isShopRegistered()">
+    <a routerLink="/owner/product" class="btn btn-success">Add new product</a>
+  </div>
+  <div *ngIf="!isShopRegistered()">
+    <div class="alert alert-danger" role="alert">Cannot add new products until the shop has been registered</div>
+  </div>
+  <br>
+  <!--  <div *ngIf="image">
+      <img [src]='image'>
+    </div>-->
+  <div *ngIf="products && products.length > 0">
+    <table class="table">
+      <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Cost</th>
+        <th scope="col"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <ng-container *ngFor="let product of products">
+        <tr>
+          <td><img [src]='product.imageUrl' class="image-view"/></td>
+          <td>{{product.name}}</td>
+          <td>{{product.description}}</td>
+          <td>{{product.cost}} zł</td>
+          <td><button class="btn btn-info" (click)="editProduct(product.id)">Edit</button></td>
+        </tr>
+      </ng-container>
+      </tbody>
+    </table>
+  </div>
+  <br>
+</div>
